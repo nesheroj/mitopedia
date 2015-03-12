@@ -1,0 +1,22 @@
+﻿<div id="artists-list" data-ng-if="Artists.length">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="pointer">
+                    <tr>
+                        <th data-ng-click="sortBy('name')" data-ng-class="{sorted:sortMode.predicate=='name',reverse:sortMode.reverse}">Nombre<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th>Cartas</th>
+                        <th data-ng-click="sortBy('url')" data-ng-class="{sorted:sortMode.predicate=='url',reverse:sortMode.reverse}">Web<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="artist in Artists | orderBy:sortMode.predicate:sortMode.reverse">
+                        <td><a href="/Ilustrador/{{ artist.id }}">{{ artist.name }}</a></td>
+                        <td>{{ (Cards | filter:{artistId:artist.id}:true).length }}</td>
+                        <td><a href="{{ artist.url }}">{{ artist.url }}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

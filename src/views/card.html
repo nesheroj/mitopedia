@@ -1,0 +1,67 @@
+<div id="card-detail" class="row well well-sm" data-ng-if="Card">
+    <carousel interval="5000" class="pull-right">
+        <slide ng-repeat="image in CardImages" active="slide.active">
+            <a target="_blank" data-ng-href="http://cdn.guerrademitos.com/PNG/{{ image }}.png">
+                <img data-ng-src="http://cdn.guerrademitos.com/JPG/{{ image }}.jpg" style="margin:auto;">
+            </a>
+        </slide>
+    </carousel>
+    <h1>{{ Card.name }} <a href="/AdminCarta/{{ Card.code}}" class="btn btn-primary" data-ng-if="isAdmin"><i class="fa fa-pencil-square-o"></i> Editar carta</a></h1>
+    <ul class="card-fields">
+        <li><label>Código:</label> {{ Card.code }}</li>
+        <li><label>Expansión:</label> {{ Card.expansion }}</li>
+        <li><label>Mitología:</label><span class="m{{ Card.mythology.sanitizeForSearch() }}"> {{ Card.mythology }}</span></li>
+        <li><label>Tipo:</label> {{ Card.type }}</li>
+        <li><label>Ilustrador:</label><a data-ng-href="/Ilustrador/{{ Card.artistId }}"> {{ Card.artistName }}</a></li>
+        <li data-ng-show="showField('cost')"><label>Coste:</label> {{ Card.cost }}</li>
+        <li data-ng-show="showField('strength')"><label>Fuerza:</label> {{ Card.strength }}</li>
+        <li data-ng-show="showField('power')"><label>Poder:</label> {{ Card.power }}</li>
+        <li data-ng-if="Card.keywords.length">
+            <label>Claves:</label>
+            <ul>
+                <li data-ng-repeat="keyword in Card.keywords|split:';'">{{ keyword }}</li>
+            </ul>
+        </li>
+        <li>
+            <label>Textos:</label>
+            <ul data-ng-if="Card.texts">
+                <li data-ng-repeat="cardtext in Card.texts | filter:noflavor">
+                    <span class="card-text-type" data-ng-if="cardtext.type != 'General'">{{ cardtext.type }}:</span><span class="card-text-text"> {{ cardtext.text }}</span>
+                </li>
+                <li data-ng-repeat="cardtext in Card.texts | filter:{type:'Flavor'}">
+                    <span class="flavor-text">&ldquo;{{ cardtext.text }}&rdquo;</span>
+                </li>
+            </ul>
+        </li>
+        <li data-ng-if="Card.texts | filter:{type:'Historia'}">
+            <label>Historia:</label>
+            <ul data-ng-if="Card.texts">
+                <li data-ng-repeat="cardtext in Card.texts | filter:{type:'Historia'}">
+                    <span class="remark-text">&ldquo;{{ cardtext.text }}&rdquo;</span>
+                </li>
+            </ul>
+        </li>
+        <li data-ng-if="Card.texts | filter:{type:'Notas'}">
+            <label>Notas:</label>
+            <ul>
+                <li data-ng-repeat="cardtext in Card.texts | filter:{type:'Notas'}">
+                    <span class="remark-text" data-ng-bind-html="cardtext.text | showdown"></span>
+                </li>
+            </ul>
+        </li>
+<!--        <li>
+            <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-width="450" data-layout="button_count" data-show-faces="true" data-send="true"></div>
+            <div class="g-plusone"></div>
+        </li>-->
+    </ul>
+    <div class="modal fade bs-modal-lg" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="img-responsive center-block" data-ng-src="http://cdn.guerrademitos.com/PNG/{{ Card.code }}.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="disqus_thread"></div>

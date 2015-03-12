@@ -1,0 +1,7 @@
+node_modules
+bower_components
+.idea
+.build
+.work
+npm-debug.log
+/stats.json

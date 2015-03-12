@@ -1,0 +1,27 @@
+{
+  "name": "MitopediaReloaded",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel-core": "^4.7.8",
+    "babel-loader": "^4.1.0",
+    "babel-runtime": "^4.7.8",
+    "css-loader": "~0.9.1",
+    "exports-loader": "^0.6.2",
+    "file-loader": "~0.8.1",
+    "gulp": "~3.8.11",
+    "gulp-util": "~3.0.4",
+    "gulp-zip": "~2.0.3",
+    "html-webpack-plugin": "~1.1.0",
+    "imports-loader": "^0.6.3",
+    "json-loader": "~0.5.1",
+    "less-loader": "~2.1.0",
+    "localtunnel": "~1.5.0",
+    "script-loader": "~0.6.1",
+    "stats-webpack-plugin": "0.0.1",
+    "style-loader": "~0.8.3",
+    "url-loader": "~0.5.5",
+    "webpack": "~1.7.3",
+    "webpack-dev-server": "~1.7.0"
+  }
+}

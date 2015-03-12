@@ -1,0 +1,38 @@
+<div id="artist-detail">
+    <div class="row well well-sm" data-ng-if="Artist">
+        <img class="pull-right" data-ng-if="Artist.picture.length" data-ng-src="{{ Artist.picture }}" />
+        <h1>{{ Artist.name }} <a href="/AdminIlustrador/{{ Artist.id }}" class="btn btn-primary" data-ng-if="isAdmin"><i class="fa fa-pencil-square-o"></i> Editar ilustrador</a></h1>
+        <ul class="card-fields">
+            <li data-ng-if="Artist.url.length"><label>Web:</label> <a href="{{ Artist.url }}">{{ Artist.url }}</a></li>
+            <li data-ng-if="Artist.bio.length" data-ng-bind-html="Artist.bio | showdown"></li>
+<!--            <li>
+                <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-width="450" data-layout="button_count" data-show-faces="true" data-send="true"></div>
+                <div class="g-plusone"></div>
+            </li>-->
+        </ul>
+    </div>
+    <tabset>
+        <tab heading="Comentarios">
+            <tab-heading>
+                <i class="fa fa-comments"></i> Comentarios
+            </tab-heading>
+            <div id="disqus_thread"></div>
+        </tab>
+        <tab heading="Cartas">
+            <tab-heading>
+                <i class="fa fa-picture-o"></i> Cartas
+            </tab-heading>
+            <ul class="card-list clearfix">
+                <li data-ng-repeat="card in filteredCards | orderBy:'name' | limitTo: 20: ( 20 * (currentPage - 1) )" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 m{{ card.mythology.sanitizeForSearch() }}">
+                    <a href="/Carta/{{ card.code }}">
+                        <img class="mythology-badge" data-ng-src="/Content/Images/{{ card.mythology.sanitizeForSearch() }}.png" />
+                        <img class="img-responsive" data-ng-src="http://cdn.guerrademitos.com/JPG/{{ card.code }}.jpg" />
+                    </a>
+                </li>
+            </ul>
+            <div class="text-center">
+                <pagination boundary-links="true" total-items="filteredCards.length" items-per-page="20" page="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            </div>
+        </tab>
+    </tabset>
+</div>

@@ -1,0 +1,39 @@
+<div class="row well well-sm" data-ng-if="Card">
+    <img class="pull-right" data-ng-src="http://cdn.guerrademitos.com/JPG/{{ Card.code }}.jpg" />
+    <ul class="card-fields">
+        <li><label>Código:</label><input type="text" name="code" data-ng-model="Card.code" /></li>
+        <li><label>Imágenes adicionales:</label><input type="text" name="image" data-ng-model="Card.image" /></li>
+        <li><label>Nombre:</label><input type="text" name="name" data-ng-model="Card.name" /></li>
+        <li><label>Expansión:</label><select name="expasion" data-ng-model="Card.expansion" data-ng-options="item for item in Expansions" /></li>
+        <li><label>Mitología:</label><select name="mythology" data-ng-model="Card.mythology" data-ng-options="item for item in Mythologies" /></li>
+        <li><label>Tipo:</label><select name="type" data-ng-model="Card.type" data-ng-options="item for item in Types" /></li>
+        <li><label>Ilustrador:</label><select name="artist" data-ng-model="Card.artistId" data-ng-options="item.id as item.name for item in Artists | orderBy:'name'" /></li>
+        <li><label>Fuerza:</label><input type="text" name="strength" data-ng-model="Card.strength" data-ng-disabled="showField('strength')" /></li>
+        <li><label>Poder:</label><input type="text" name="power" data-ng-model="Card.power" data-ng-disabled="showField('power')" /></li>
+        <li><label>Coste:</label><input type="text" name="cost" data-ng-model="Card.cost" data-ng-disabled="showField('cost')" /></li>
+        <li><label>Claves:</label><input type="text" name="keywords" data-ng-model="Card.keywords" /></li>
+        <li>
+            <span>Textos: <button class="btn btn-primary" data-ng-click="addText()"><i class="fa fa-plus"></i> Añadir</button></span>
+            <ul data-ng-if="Card.texts">
+                <li data-ng-repeat="cardtext in Card.texts">
+                    <ul>
+                        <li>
+                            <select data-ng-model="cardtext.type" data-ng-options="item for item in TextTypes" />
+                        </li>
+                        <li>
+                            <textarea data-ng-model="cardtext.text" rows="5" style="width: 400px"></textarea>
+                        </li>
+                        <li>
+                            <button class="btn btn-danger" data-ng-click="removeText($index)"><i class="fa fa-minus"></i> Eliminar</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <button class="btn btn-success" data-ng-disabled="saving" data-ng-click="saveCard()"><i class="fa fa-save"></i> Guardar</button>
+            <button class="btn btn-success" data-ng-if="Card.published != '1'" data-ng-disabled="saving" data-ng-click="publishCard()"><i class="fa fa-save"></i> Guardar y publicar</button>
+            <a href="/Carta/{{ Card.code}}" class="btn btn-primary" data-ng-if="Card.id"><i class="fa fa-eye"></i> Ver carta</a>
+        </li>
+    </ul>
+</div>

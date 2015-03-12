@@ -1,0 +1,191 @@
+@import url(http://fonts.googleapis.com/css?family=Marcellus+SC);
+@import url(http://fonts.googleapis.com/css?family=Marcellus);
+@import url(loading-bar.min.css);
+
+@color-greek: #9d9d9d;
+@color-egiptian: #e5cc80;
+@color-nordic: #0070dd;
+@color-japanese: #C41E3B;
+@color-aztec: #AAD372;
+@color-egiptian: #FF7C0A;
+@color-neutral: #451D08;
+@color-ancient: #006600;
+@color-celtic: #330066;
+
+.nav, .pagination, .carousel, .panel-title a, .pointer { cursor: pointer; }
+
+[data-ng-cloak=""] {
+    display: none;
+}
+
+body {
+    font-family: 'Marcellus SC', serif;
+}
+
+input, select, textarea {
+    font-family: 'Marcellus', Arial;
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+i.fa-android {
+    color: #A4C639;
+}
+
+.mnordica {
+    color: @color-nordic;
+}
+
+.mazteca {
+    color: @color-aztec;
+}
+
+.mjaponesa {
+    color: @color-japanese;
+}
+
+.mgriega {
+    color: @color-greek;
+}
+
+.megipcia {
+    color: @color-egiptian;
+}
+
+.mneutral {
+    color: @color-neutral;
+}
+
+.mprimigenia {
+    color: @color-ancient;
+}
+
+.mcelta {
+    color: @color-celtic;
+}
+
+label.tip > span {
+    border-bottom: 1px dotted #808080;
+    cursor: help;
+}
+
+div.view-controls > div {
+    margin-bottom: 25px;
+}
+
+ul.filter-fields, ul.card-fields {
+    li {
+        list-style-type: none;
+    }
+}
+
+#cards-list, #artists-list {
+    label.search-term > i {
+        position: relative;
+        margin-left: -20px;
+    }
+
+    div.filter-select > select {
+        width: 100%;
+    }
+
+    th {
+        i.fa-sort-amount-asc, i.fa-sort-amount-desc {
+            display: none;
+        }
+
+        &.sorted:not(.reverse) i.fa-sort-amount-asc {
+            display: inline;
+        }
+
+        &.sorted.reverse i.fa-sort-amount-desc {
+            display: inline;
+        }
+    }
+
+    td {
+        font-family: 'Marcellus', Arial
+    }
+}
+
+#cards-list, #artist-detail {
+
+    ul.card-list > li {
+      display: inline-block;
+      margin-bottom: 30px;
+      width: 20%;
+      padding-right: 30px;
+      vertical-align: middle;
+
+        > a {
+          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+          display: block;
+          position: relative;
+
+            &:hover {
+                box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
+            }
+
+            > img.mythology-badge {
+                position: absolute;
+                bottom: -8px;
+                right: -8px;
+                width: 30%;
+                max-width: 48px;
+            }
+        }
+
+        &.mnordica > a {
+            border: 2px solid @color-nordic;
+        }
+
+        &.mazteca > a {
+            border: 2px solid @color-aztec;
+        }
+
+        &.mjaponesa > a {
+            border: 2px solid @color-japanese;
+        }
+
+        &.mgriega > a {
+            border: 2px solid @color-greek;
+        }
+
+        &.megipcia > a {
+            border: 2px solid @color-egiptian;
+        }
+
+        &.mneutral > a {
+            border: 2px solid @color-neutral;
+        }
+
+        &.mprimigenia > a {
+            border: 2px solid @color-ancient;
+        }
+
+        &.mcelta > a {
+            border: 2px solid @color-celtic;
+        }
+    }
+}
+
+#card-detail {
+    span.flavor-text {
+        font-style: italic;
+    }
+
+    span.card-text-type {
+        font-weight: bold;
+    }
+
+    span.card-text-text {
+        font-family: 'Marcellus', Arial;
+    }
+}
+
+#artist-detail > div:first-child > img {
+    max-width: 30%;
+    margin-left: 15px;
+}

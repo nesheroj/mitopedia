@@ -1,0 +1,9 @@
+﻿<div class="row well well-sm" data-ng-if="Artist">
+    <ul class="card-fields">
+        <li>Nombre: <input type="text" name="name" data-ng-model="Artist.name" /></li>
+        <li>Web: <input type="text" name="url" data-ng-model="Artist.url" /></li>
+        <li>Url imagen: <input type="text" name="picture" data-ng-model="Artist.picture" /></li>
+        <li>Bio: <textarea name="bio" data-ng-model="Artist.bio"></textarea></li>
+        <li><button class="btn btn-success" data-ng-disabled="saving" data-ng-click="saveArtist()"><i class="fa fa-save"></i> Guardar</button> <a href="/Ilustrador/{{ Artist.id }}" class="btn btn-primary" data-ng-if="Card.id"><i class="fa fa-eye"></i> Ver ilustrador</a></li>
+    </ul>
+</div>

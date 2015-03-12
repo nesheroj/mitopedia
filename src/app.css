@@ -1,0 +1,173 @@
+@import url(http://fonts.googleapis.com/css?family=Marcellus+SC);
+@import url(http://fonts.googleapis.com/css?family=Marcellus);
+.nav,
+.pagination,
+.carousel,
+.panel-title a,
+.pointer {
+  cursor: pointer;
+}
+[data-ng-cloak=""] {
+  display: none;
+}
+body {
+  font-family: 'Marcellus SC', serif;
+}
+input,
+select,
+textarea {
+  font-family: 'Marcellus', Arial;
+}
+.navbar-brand {
+  padding: 0;
+}
+i.fa-android {
+  color: #A4C639;
+}
+.mnordica {
+  color: #0070dd;
+}
+.mazteca {
+  color: #aad372;
+}
+.mjaponesa {
+  color: #c41e3b;
+}
+.mgriega {
+  color: #9d9d9d;
+}
+.megipcia {
+  color: #ff7c0a;
+}
+.mneutral {
+  color: #451d08;
+}
+.mprimigenia {
+  color: #006600;
+}
+.mcelta {
+  color: #330066;
+}
+.msumeria {
+  color: #0076B2;
+}
+.mhindu {
+  color: #FFBB28;
+}
+label.tip > span {
+  border-bottom: 1px dotted #808080;
+  cursor: help;
+}
+div.view-controls > div {
+  margin-bottom: 25px;
+}
+ul.filter-fields li,
+ul.card-fields li {
+  list-style-type: none;
+}
+#cards-list label.search-term > i,
+#artists-list label.search-term > i {
+  position: relative;
+  margin-left: -20px;
+}
+#cards-list div.filter-select > select,
+#artists-list div.filter-select > select {
+  width: 100%;
+}
+#cards-list th i.fa-sort-amount-asc,
+#artists-list th i.fa-sort-amount-asc,
+#cards-list th i.fa-sort-amount-desc,
+#artists-list th i.fa-sort-amount-desc {
+  display: none;
+}
+#cards-list th.sorted:not(.reverse) i.fa-sort-amount-asc,
+#artists-list th.sorted:not(.reverse) i.fa-sort-amount-asc {
+  display: inline;
+}
+#cards-list th.sorted.reverse i.fa-sort-amount-desc,
+#artists-list th.sorted.reverse i.fa-sort-amount-desc {
+  display: inline;
+}
+#cards-list td,
+#artists-list td {
+  font-family: 'Marcellus', Arial;
+}
+#cards-list ul.card-list > li,
+#artist-detail ul.card-list > li {
+  display: inline-block;
+  margin-bottom: 30px;
+  width: 20%;
+  padding-right: 30px;
+  vertical-align: middle;
+}
+#cards-list ul.card-list > li > a,
+#artist-detail ul.card-list > li > a {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  display: block;
+  position: relative;
+}
+#cards-list ul.card-list > li > a:hover,
+#artist-detail ul.card-list > li > a:hover {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
+}
+#cards-list ul.card-list > li > a > img.mythology-badge,
+#artist-detail ul.card-list > li > a > img.mythology-badge {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 30%;
+  max-width: 48px;
+}
+#cards-list ul.card-list > li.mnordica > a,
+#artist-detail ul.card-list > li.mnordica > a {
+  border: 2px solid #0070dd;
+}
+#cards-list ul.card-list > li.mazteca > a,
+#artist-detail ul.card-list > li.mazteca > a {
+  border: 2px solid #aad372;
+}
+#cards-list ul.card-list > li.mjaponesa > a,
+#artist-detail ul.card-list > li.mjaponesa > a {
+  border: 2px solid #c41e3b;
+}
+#cards-list ul.card-list > li.mgriega > a,
+#artist-detail ul.card-list > li.mgriega > a {
+  border: 2px solid #9d9d9d;
+}
+#cards-list ul.card-list > li.megipcia > a,
+#artist-detail ul.card-list > li.megipcia > a {
+  border: 2px solid #ff7c0a;
+}
+#cards-list ul.card-list > li.mneutral > a,
+#artist-detail ul.card-list > li.mneutral > a {
+  border: 2px solid #451d08;
+}
+#cards-list ul.card-list > li.mprimigenia > a,
+#artist-detail ul.card-list > li.mprimigenia > a {
+  border: 2px solid #006600;
+}
+#cards-list ul.card-list > li.mcelta > a,
+#artist-detail ul.card-list > li.mcelta > a {
+  border: 2px solid #330066;
+}
+#cards-list ul.card-list > li.msumeria > a,
+#artist-detail ul.card-list > li.msumeria > a {
+  border: 2px solid #0076B2;
+}
+#cards-list ul.card-list > li.mhindu > a,
+#artist-detail ul.card-list > li.mhindu > a {
+  border: 2px solid #FFBB28;
+}
+#card-detail span.flavor-text {
+  font-style: italic;
+}
+#card-detail span.card-text-type {
+  font-weight: bold;
+}
+#card-detail span.card-text-text {
+  font-family: 'Marcellus', Arial;
+}
+#artist-detail > div:first-child > img {
+  max-width: 30%;
+  margin-left: 15px;
+}

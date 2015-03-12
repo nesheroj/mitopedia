@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" data-ng-app="mitopedia" ng-strict-di>
+<head>
+    <meta charset="utf-8">
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title data-ng-bind-template="MitoPedia{{ ' - '  + Title }}">MitoPedia</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body data-ng-cloak>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mp-navbar-collapse">
+                <span class="sr-only">Navegación</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img class="img-responsive" src="data:image/png;base64,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" /></a>
+            </div>
+            <div class="collapse navbar-collapse" id="mp-navbar-collapse">
+                <ul id="menu" class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cartas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Cartas/Panteones">Panteones</a></li>
+                            <li><a href="/Cartas/Recursos">Recursos</a></li>
+                            <li><a href="/Cartas/Personajes">Personajes</a></li>
+                            <li><a href="/Cartas/Eventos">Eventos</a></li>
+                            <li><a href="/Cartas/Acciones">Acciones</a></li>
+                            <li><a href="/Cartas/Equipo">Equipo</a></li>
+                            <li><a href="/Cartas/Invocaciones">Invocaciones</a></li>
+                            <li><a href="/Cartas/Tokens">Tokens</a></li>
+                        </ul>
+                    </li>
+                    <!--<li><a href="/Mazos/">Mazos</a></li>-->
+                    <li><a href="/Ilustradores/">Ilustradores</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a target="_blank" href="http://bit.ly/ZMKLZj"><i class="fa fa-android"></i> Contadores para móvil - android</a></li>
+                            <li><a target="_blank" href="http://bit.ly/1G3PVpL"><i class="fa fa-apple"></i> GdM en tu movil - IOS</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" data-ng-if="isAdmin">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/AdminCarta">Crear Carta</a></li>
+                            <li><a href="/AdminIlustrador">Crear Ilustrador</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" data-ng-if="loginStatus">
+                    <li class="dropdown" data-ng-if="loginStatus.status == 'connected'">
+                        <a href="#" class="dropdown-toggle text-primary" data-toggle="dropdown" data-ng-if="me.name">{{ me.name }} <b class="caret"></b> <img data-ng-if="!me.error" data-ng-src="http://graph.facebook.com/{{ me.id }}/picture?width=20&height=20"></a>
+                        <a href="#" class="dropdown-toggle text-danger" data-toggle="dropdown" data-ng-if="me.error">{{ me.error }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="text-center">
+                                <button class="btn btn-danger" data-ng-click="logout()"><i class="fa fa-sign-out"></i> Logout</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" data-ng-if="loginStatus.status != 'connected'">
+                        <a href="#" class="dropdown-toggle text-danger" data-toggle="dropdown">Desconectado <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="text-center">
+                                <button class="btn btn-primary" data-ng-click="login()"><i class="fa fa-sign-in"></i> Login</button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section id="content" class="container" data-ng-view></section>
+    <footer>
+        <div class="container text-center"><small>&copy;<a href="http://www.guerrademitos.com">Guerra de Mitos</a> Todos los derechos reservados. Las ilustraciones son &copy; de sus respectivos autores.</small></div>
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-animate.min.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-touch.js"></script>
+    {% for (var chunk in o.htmlWebpackPlugin.assets) { %} <script src="{%=o.htmlWebpackPlugin.assets[chunk]%}"></script>{% } %}
+</body>
+</html>

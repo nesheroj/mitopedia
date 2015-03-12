@@ -1,0 +1,26 @@
+﻿<h2>Coming soon</h2>
+<div class="row" data-ng-if="false">
+    <div class="well well-sm clearfix">
+        <ul class="filter-fields">
+            <li><label><span>Nombre: </span><input type="text" data-ng-model="Filter.text" /></label> <label class="tip" data-toggle="tooltip" title="Actívalo para buscar también en la descripción del mazo"><input type="checkbox" data-ng-model="Filter.extendedSeach" /> <span>Búsqueda extendida</span></label></li>
+            <li><label><span>Creador: </span><select data-ng-model="Filter.creator" data-ng-options="c for c in Creators"></select></label></li>
+            <li><label><span>Panteón: </span><select data-ng-model="Filter.pantheon" data-ng-options="p for p in Pantheons"></select></label></li>
+        </ul>
+    </div>
+    <table class="table-bordered table-striped table-hover col-md-12">
+        <thead>
+            <tr>
+                <th class="col-md-4" data-ng-click="sortBy('name')" data-ng-class="{sorted:sortMode.predicate=='name',reverse:sortMode.reverse}">Nombre<i class="icon-sort-by-attributes pull-right"></i><i class="icon-sort-by-attributes-altm pull-right"></i></th>
+                <th class="col-md-4" data-ng-click="sortBy('creator')" data-ng-class="{sorted:sortMode.predicate=='creator',reverse:sortMode.reverse}">Creador<i class="icon-sort-by-attributes pull-right"></i><i class="icon-sort-by-attributes-alt pull-right"></i></th>
+                <th class="col-md-4" data-ng-click="sortBy('pantheon')" data-ng-class="{sorted:sortMode.predicate=='pantheon',reverse:sortMode.reverse}">Panteón<i class="icon-sort-by-attributes pull-right"></i><i class="icon-sort-by-attributes-alt pull-right"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="deck in Decks | filter:filterDecks | orderBy:sortMode.predicate:sortMode.reverse">
+                <td><a href="/Mazo/{{ deck.id }}">{{ deck.name }}</a></td>
+                <td>{{ deck.creator }}</td>
+                <td>{{ Pantheons[deck.pantheon] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

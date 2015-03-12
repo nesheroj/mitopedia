@@ -1,0 +1,114 @@
+﻿<div id="cards-list" data-ng-if="Cards.length">
+    <div class="well well-sm clearfix row">
+        <ul class="filter-fields col-xs-12 col-sm-12 col-md-6">
+            <li><label class="search-term"><span>Nombre: </span><input type="text" data-ng-model="Filter.text" data-mp-on-esc="Filter.text = ''" typeahead="card.name for card in Cards | filter:{name:$viewValue} | limitTo:8" typeahead-min-length="2" typeahead-wait-ms="500" />
+            <i class="fa fa-times text-danger pointer" data-ng-if="Filter.text.length" data-ng-click="Filter.text = ''"></i></label> <label class="tip"tooltip-placement="bottom" tooltip="Actívalo para buscar también en el texto y claves de la carta"><input type="checkbox" data-ng-model="Filter.extendSearch" /> <span>Búsqueda extendida</span></label></li>
+            <li><label><span>Ilustrador: </span><select name="artist" data-ng-model="Filter.artistId" data-ng-options="item.id as item.name for item in Artists" /></label></li>
+            <li>
+                <label>
+                    <span>Filtrar por </span>
+                    <select data-ng-model="Filter.keywordMode" data-ng-options="value as key for (key, value) in KeywordModes" />
+                    <span> las claves seleccionadas.</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <span>Mostrar cartas con habilidades de </span>
+                    <select data-ng-model="Filter.textType" data-ng-options="item for item in TextTypes" />
+                </label>
+            </li>
+            <li>
+                <button class="btn btn-warning" data-ng-click="clearFilters()">Limpiar filtros</button>
+            </li>
+        </ul>
+        <div class="col-xs-4 col-sm-4 col-md-2 filter-select">
+            <label>Claves:</label>
+            <i class="fa fa-times text-danger pull-right pointer" data-ng-if="Filter.keywords.length" data-ng-click="Filter.keywords = []"></i>
+            <select multiple size="6" data-ng-model="Filter.keywords" data-ng-options="k for k in Keywords" />
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-2 filter-select">
+            <label>Expansión:</label>
+            <i class="fa fa-times text-danger pull-right pointer" data-ng-if="Filter.expansions.length" data-ng-click="Filter.expansions = []"></i>
+            <select multiple size="6" data-ng-model="Filter.expansions" data-ng-options="e for e in Expansions" />
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-2 filter-select">
+            <label>Mitología:</label>
+            <i class="fa fa-times text-danger pull-right pointer" data-ng-if="Filter.mythologies.length" data-ng-click="Filter.mythologies = []"></i>
+            <select multiple size="6" data-ng-model="Filter.mythologies" data-ng-options="m for m in Mythologies" />
+        </div>
+    </div>
+    <div class="view-controls text-center">
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-default" data-ng-class="{active:displayMode == 'table'}" data-ng-click="setDisplayMode('table')">
+                <input type="radio" name="display"><i class="fa fa-th-list" title="Tabla"></i>
+            </label>
+<!--            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Mostrar {{ pageSize }} resultados <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">20</a></li>
+                    <li><a href="#">50</a></li>
+                    <li><a href="#">100</a></li>
+                    <li><a href="#">todos</a></li>
+                </ul>
+            </div>-->
+            <label class="btn btn-default" data-ng-class="{active:displayMode == 'list'}" data-ng-click="setDisplayMode('list')">
+                <input type="radio" name="display"><i class="fa fa-th" title="Lista"></i>
+            </label>
+        </div>
+        <div data-ng-if="displayMode == 'list'">
+            <span>Ordenar por: </span>
+            <select data-ng-model="sortMode.predicate">
+                <option value="name">Nombre</option>
+                <option value="type" data-ng-hide="Filter.type">Tipo</option>
+                <option value="mythology">Mitología</option>
+                <option value="artist">Ilustrador</option>
+            </select>
+            <select data-ng-model="sortMode.reverse" data-ng-options="value as key for (key, value) in SortDirections" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover pointer" data-ng-if="displayMode == 'table'">
+                <thead class=" pointer">
+                    <tr>
+                        <th data-ng-click="sortBy('name')" data-ng-class="{sorted:sortMode.predicate==='name',reverse:sortMode.reverse==='true'}">Nombre<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('type')" data-ng-class="{sorted:sortMode.predicate==='type',reverse:sortMode.reverse==='true'}" data-ng-hide="Filter.type">Tipo<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('cost')" data-ng-class="{sorted:sortMode.predicate==='cost',reverse:sortMode.reverse==='true'}" data-ng-show="showCol('cost')">Coste<i class="fa sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('strength')" data-ng-class="{sorted:sortMode.predicate==='strength',reverse:sortMode.reverse==='true'}" data-ng-show="showCol('strength')">Fuerza<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('power')" data-ng-class="{sorted:sortMode.predicate==='power',reverse:sortMode.reverse==='true'}" data-ng-show="showCol('power')">Poder<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('mythology')" data-ng-class="{sorted:sortMode.predicate==='mythology',reverse:sortMode.reverse==='true'}">Mitología<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('expansion')" data-ng-class="{sorted:sortMode.predicate==='expansion',reverse:sortMode.reverse==='true'}">Expansión<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                        <th data-ng-click="sortBy('code')" data-ng-class="{sorted:sortMode.predicate==='code',reverse:sortMode.reverse==='true'}" data-ng-hide="Filter.type">Código<i class="fa fa-sort-amount-asc pull-right"></i><i class="fa fa-sort-amount-desc pull-right"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="card in filteredCards | orderBy:sortMode.predicate:sortMode.reverse | limitTo: 25: ( 25 * (currentPage - 1) )">
+                        <td><a href="/Carta/{{ card.code }}">{{ card.name }}</a></td>
+                        <td data-ng-hide="Filter.type">{{ card.type }}</td>
+                        <td data-ng-show="showCol('cost')">{{ card.cost }}</td>
+                        <td data-ng-show="showCol('strength')">{{ card.strength }}</td>
+                        <td data-ng-show="showCol('power')">{{ card.power }}</td>
+                        <td class="m{{ card.mythology.sanitizeForSearch() }}">{{ card.mythology }}</td>
+                        <td>{{ card.expansion }}</td>
+                        <td data-ng-hide="Filter.type"><a href="/Carta/{{ card.code }}">{{ card.code }}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div data-ng-if="displayMode == 'list'">
+            <ul class="card-list clearfix">
+                <li data-ng-repeat="card in filteredCards | orderBy:sortMode.predicate:sortMode.reverse | limitTo: 25: ( 25 * (currentPage - 1) )" class=" m{{ card.mythology.sanitizeForSearch() }}">
+                    <a href="/Carta/{{ card.code }}">
+                        <img class="mythology-badge" data-ng-src="/Content/Images/{{ card.mythology.sanitizeForSearch() }}.png" />
+                        <img class="img-responsive" data-ng-src="http://cdn.guerrademitos.com/JPG/{{ card.code }}.jpg" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center">
+            <pagination boundary-links="true" total-items="filteredCards.length" items-per-page="25" page="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
+    </div>
+</div>
