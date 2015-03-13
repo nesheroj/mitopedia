@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var MitoPedia;
 (function (MitoPedia) {
     var AdminCardController = (function () {
@@ -14,12 +14,12 @@ var MitoPedia;
             $scope.showField = function (column) {
                 if ($scope.Card !== undefined && $scope.Card !== null) {
                     switch (column) {
-                        case "cost":
-                            return ["personaje", "token", "equipo", "recurso", "accion", "invocacion"].indexOf($scope.Card.type) === -1;
-                        case "strength":
-                            return ["personaje", "token", "equipo"].indexOf($scope.Card.type) === -1;
-                        case "power":
-                            return ["personaje", "token", "equipo", "panteon", "invocacion"].indexOf($scope.Card.type) === -1;
+                        case 'cost':
+                            return ['personaje', 'token', 'equipo', 'recurso', 'accion', 'invocacion'].indexOf($scope.Card.type) === -1;
+                        case 'strength':
+                            return ['personaje', 'token', 'equipo'].indexOf($scope.Card.type) === -1;
+                        case 'power':
+                            return ['personaje', 'token', 'equipo', 'panteon', 'invocacion'].indexOf($scope.Card.type) === -1;
                         default:
                             return false;
                     }
@@ -27,15 +27,15 @@ var MitoPedia;
                 return false;
             };
             $scope.saving = false;
-            $scope.Expansions = ["GDM1", "GDM2", "GDM3", "GDM4", "Promocional"];
-            $scope.Mythologies = ["Japonesa", "Nordica", "Azteca", "Griega", "Egipcia", "Neutral", "Primigenia", "Celta"];
-            $scope.Types = ["panteon", "personaje", "equipo", "recurso", "accion", "evento", "invocacion", "token"];
-            $scope.TextTypes = ["Flavor", "General", "Influencia", "Enfrentamiento", "Notas"];
+            $scope.Expansions = ['GDM1', 'GDM2', 'GDM3', 'GDM4', 'Promocional'];
+            $scope.Mythologies = ['Japonesa', 'Nordica', 'Azteca', 'Griega', 'Egipcia', 'Neutral', 'Primigenia', 'Celta'];
+            $scope.Types = ['panteon', 'personaje', 'equipo', 'recurso', 'accion', 'evento', 'invocacion', 'token'];
+            $scope.TextTypes = ['Flavor', 'General', 'Influencia', 'Enfrentamiento', 'Notas'];
 
             $scope.addText = function () {
                 if ($scope.Card.texts === undefined)
                     $scope.Card.texts = [];
-                $scope.Card.texts.push({ type: "General", text: "" });
+                $scope.Card.texts.push({ type: 'General', text: '' });
             };
 
             $scope.removeText = function (index) {
@@ -76,9 +76,9 @@ var MitoPedia;
                 } else {
                     $rootScope.Title = 'Crear Carta';
                     $scope.Card = {
-                        code: "",
-                        image: "",
-                        name: "",
+                        code: '',
+                        image: '',
+                        name: '',
                         promotion: false,
                         expansion: $scope.Expansions[0],
                         mythology: $scope.Mythologies[0],
@@ -87,7 +87,7 @@ var MitoPedia;
                         cost: 0,
                         strength: 0,
                         power: 0,
-                        keywords: "",
+                        keywords: '',
                         published: false
                     };
                 }

@@ -1,12 +1,6 @@
 ﻿'use strict';
 
 export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mitopediaStore', function cardsController($scope, $location, $routeParams, $rootScope, $q, mitopediaStore) {
-	this.$scope = $scope;
-	this.$location = $location;
-	this.$routeParams = $routeParams;
-	this.$rootScope = $rootScope;
-	this.$q = $q;
-	this.mitopediaStore = mitopediaStore;
 	$rootScope.Title = $routeParams.type || 'Cartas';
 	$scope.Artists = [];
 	$scope.Cards = [];
@@ -29,7 +23,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		reverse: false
 	};
 
-	($scope.setDisplayMode = function(mode) {
+	($scope.setDisplayMode = mode => {
 		sessionStorage.setItem('displayMode', mode);
 		$scope.displayMode = mode;
 		if (mode === 'table') {
@@ -47,7 +41,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		}
 	})(sessionStorage.getItem('displayMode') || 'table');
 
-	$scope.sortBy = function(predicate) {
+	$scope.sortBy = predicate => {
 		if (predicate === $scope.sortMode.predicate)
 			$scope.sortMode.reverse = !$scope.sortMode.reverse;
 		else {
@@ -56,7 +50,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		}
 	};
 
-	$scope.showCol = function(column) {
+	$scope.showCol = column =>  {
 		switch (column) {
 			case 'cost':
 				return ['personaje', 'equipo', 'recurso', 'accion', 'invocacion'].indexOf($scope.CardsType) !== -1;
@@ -81,7 +75,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		textType: $scope.TextTypes[0]
 	};
 
-	$scope.clearFilters = function() {
+	$scope.clearFilters = () => {
 		var filter = {};
 		for (var attrName in defaultFilter)
 			filter[attrName] = defaultFilter[attrName];
@@ -126,42 +120,6 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 			$scope.CardsType = '';
 	};
 
-	function filterCards() {
-		$scope.filteredCards = $scope.Cards.filter(function(card, index, cards) {
-			var pass = ($scope.Filter.text === '' || card.name.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1);
-			if ($scope.Filter.extendSearch) {
-				pass = pass || ($scope.Filter.text === '' || (card.texts || []).some(function(cardText) {
-					return cardText.text.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1;
-				}) || card.keywords.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1);
-			}
-			pass = pass && ($scope.CardsType === '' || $scope.CardsType === card.type);
-			pass = pass && ($scope.Filter.artistId === -1 || $scope.Filter.artistId === card.artistId);
-			pass = pass && ($scope.Filter.expansions.length === 0 || $scope.Filter.expansions.some(function(filterExpansion) {
-				return filterExpansion === card.expansion;
-			}));
-			pass = pass && ($scope.Filter.mythologies.length === 0 || $scope.Filter.mythologies.some(function(filterMythology) {
-				return filterMythology === card.mythology;
-			}));
-			pass = pass && ($scope.Filter.textType === 'cualquier tipo' || card.texts.some(function(cardText) {
-				return cardText.type.sanitizeForSearch() === $scope.Filter.textType;
-			}));
-			if ($scope.Filter.keywordMode) {
-				pass = pass && ($scope.Filter.keywords.length === 0 || $scope.Filter.keywords.every(function(filterKeyword) {
-					return card.keywords.split(';').some(function(cardKeyword) {
-						return filterKeyword === cardKeyword;
-					});
-				}));
-			} else {
-				pass = pass && ($scope.Filter.keywords.length === 0 || card.keywords.split(';').some(function(cardKeyword) {
-					return $scope.Filter.keywords.some(function(filterKeyword) {
-						return filterKeyword === cardKeyword;
-					});
-				}));
-			}
-			return pass;
-		});
-	}
-
 	$q.all([mitopediaStore.getCards(), mitopediaStore.getArtists()]).then(function(result) {
 		$scope.Cards = result[0];
 		$scope.Artists.push({
@@ -171,20 +129,14 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 			url: '',
 			bio: ''
 		});
-		$scope.Artists = $scope.Artists.concat(result[1].sort(function(a, b) {
-			if (a.name > b.name)
-				return 1;
-			if (a.name < b.name)
-				return -1;
-			return 0;
-		}));
-		$scope.Cards.forEach(function(card) {
+		$scope.Artists = $scope.Artists.concat(result[1].sort((a, b) => +(a.name > b.name) || +(a.name === b.name) - 1));
+		$scope.Cards.forEach(card => {
 			if ($scope.Expansions.indexOf(card.expansion) === -1)
 				$scope.Expansions.push(card.expansion);
 			if ($scope.Mythologies.indexOf(card.mythology) === -1)
 				$scope.Mythologies.push(card.mythology);
 			if (card.keywords) {
-				card.keywords.split(';').forEach(function(cardKeyword) {
+				card.keywords.split(';').forEach(cardKeyword => {
 					if ($scope.Keywords.indexOf(cardKeyword) === -1)
 						$scope.Keywords.push(cardKeyword);
 				});
@@ -195,11 +147,41 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		$scope.Mythologies.sort();
 		$scope.Keywords.sort();
 
-		$scope.$watch('Filter', function(newValue, oldValue, scope) {
+		$scope.$watch('Filter', (newValue, oldValue, scope) => {
 			sessionStorage.setItem('filter', JSON.stringify(newValue));
-			filterCards();
+			$scope.filteredCards = $scope.Cards.filter(function(card, index, cards) {
+				var pass = ($scope.Filter.text === '' || card.name.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1);
+				if ($scope.Filter.extendSearch) {
+					pass = pass || ($scope.Filter.text === '' || (card.texts || []).some(function(cardText) {
+						return cardText.text.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1;
+					}) || card.keywords.sanitizeForSearch().indexOf($scope.Filter.text.sanitizeForSearch()) !== -1);
+				}
+				pass = pass && ($scope.CardsType === '' || $scope.CardsType === card.type);
+				pass = pass && ($scope.Filter.artistId === -1 || $scope.Filter.artistId === card.artistId);
+				pass = pass && ($scope.Filter.expansions.length === 0 || $scope.Filter.expansions.some(function(filterExpansion) {
+					return filterExpansion === card.expansion;
+				}));
+				pass = pass && ($scope.Filter.mythologies.length === 0 || $scope.Filter.mythologies.some(function(filterMythology) {
+					return filterMythology === card.mythology;
+				}));
+				pass = pass && ($scope.Filter.textType === 'cualquier tipo' || card.texts.some(function(cardText) {
+					return cardText.type.sanitizeForSearch() === $scope.Filter.textType;
+				}));
+				if ($scope.Filter.keywordMode) {
+					pass = pass && ($scope.Filter.keywords.length === 0 || $scope.Filter.keywords.every(function(filterKeyword) {
+						return card.keywords.split(';').some(function(cardKeyword) {
+							return filterKeyword === cardKeyword;
+						});
+					}));
+				} else {
+					pass = pass && ($scope.Filter.keywords.length === 0 || card.keywords.split(';').some(function(cardKeyword) {
+						return $scope.Filter.keywords.some(function(filterKeyword) {
+							return filterKeyword === cardKeyword;
+						});
+					}));
+				}
+				return pass;
+			});
 		}, true);
-	}, function(error) {
-		console.log(error);
-	});
+	}, console.log);
 }];

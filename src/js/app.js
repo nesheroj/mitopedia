@@ -8,19 +8,20 @@ import 'js/utils.js';
 
 const FACEBOOK_APP_ID = '628709617168962';
 const ANALYTICS_APP_ID = 'UA-44248684-1';
+require('app.less');
 
 angular
-	.module('mitopedia', ['ngRoute', 'ngTouch', 'ezfb', 'chieffancypants.loadingBar', 'mitopedia.directives.', 'mitopedia.filters'])
+	.module('mitopedia', ['ngRoute', 'ngTouch', 'ezfb', 'chieffancypants.loadingBar', 'mitopedia.directives', 'mitopedia.filters'])
 	.service('mitopediaStore', services.mitopediaStore)
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', { controller: controllers.cardsController, templateUrl: require('views/cards.html') })
-			.when('/AdminCarta/:code?', { controller: MitoPedia.AdminCardController, templateUrl: '/Views/admincard.html' })
-			.when('/AdminIlustrador/:id?', { controller: MitoPedia.AdminArtistController, templateUrl: '/Views/adminartist.html' })
+			.when('/AdminCarta/:code?', { controller: controllers.adminCardController, templateUrl: require('views/admincard.html') })
+			.when('/AdminIlustrador/:id?', { controller: controllers.adminArtistController, templateUrl: require('views/adminartist.html') })
 			.when('/Cartas/:type', { controller: controllers.cardsController, templateUrl: require('views/cards.html') })
-			.when('/Carta/:code', { controller: MitoPedia.CardController, templateUrl: '/Views/card.html' })
-			.when('/Ilustradores/', { 	controller: MitoPedia.ArtistsController, templateUrl: '/Views/artists.html' })
-			.when('/Ilustrador/:id', { controller: MitoPedia.ArtistController, templateUrl: '/Views/artist.html' })
+			.when('/Carta/:code', { controller: controllers.cardController, templateUrl: require('views/card.html') })
+			.when('/Ilustradores/', { controller: controllers.artistsController, templateUrl: require('views/artists.html') })
+			.when('/Ilustrador/:id', { controller: controllers.artistController, templateUrl: require('views/artist.html') })
 			.otherwise({ redirectTo: '/' });
 
 		$locationProvider.html5Mode(true).hashPrefix('!');
@@ -30,7 +31,7 @@ angular
 			status: true,
 			cookie: true
 		});
-	}]).run(['$location', '$rootScope', '$window' /*, '$FB'*/ , function($location, $rootScope, $window, $FB) {
+	}]).run(['$location', '$rootScope', '$window', '$FB' , function($location, $rootScope, $window, $FB) {
 		$FB.Event.subscribe('auth.statusChange', function(statusRes) {
 			$rootScope.loginStatus = statusRes;
 			$FB.api('/me').then(function(me) {
@@ -61,7 +62,7 @@ angular
 		var ga = document.createElement('script');
 		ga.type = 'text/javascript';
 		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(ga, s);
 

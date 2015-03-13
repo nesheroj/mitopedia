@@ -8,7 +8,7 @@ module.exports = {
 	context: path.join(__dirname, 'src'),
 	entry: {
 		app: './js/app.js',
-		verdor: [
+		vendor: [
 			'script!' + path.join(__dirname, 'vendor/angular-easyfb.min.js'),
 			'script!' + path.join(__dirname, 'vendor/loading-bar.min.js')
 		]
@@ -36,6 +36,7 @@ module.exports = {
 		extensions: ['', '.js']
 	},
 	plugins: [
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'mitopedia.vendor.js?[hash]'),
 		new HtmlWebpackPlugin({ title: 'Mitopedia',	template: 'src/index.html' }),
 		new StatsPlugin(path.join(__dirname, 'stats.json'))
 	]

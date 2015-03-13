@@ -1,12 +1,6 @@
 'use strict';
 
-export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', function artistsController($scope, $location, $routeParams, $rootScope, $q, MitopediaApiStorage) {
-  this.$scope = $scope;
-  this.$location = $location;
-  this.$routeParams = $routeParams;
-  this.$rootScope = $rootScope;
-  this.$q = $q;
-  this.MitopediaApiStorage = MitopediaApiStorage;
+export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mitopediaStore', function artistsController($scope, $location, $routeParams, $rootScope, $q, mitopediaStore) {
   $scope.Cards = [];
   $scope.Artists = [];
   $scope.sortMode = {
@@ -26,7 +20,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', funct
 
   $rootScope.Title = 'Ilustradores';
 
-  $q.all([MitopediaApiStorage.getCards(), MitopediaApiStorage.getArtists()]).then(function (result) {
+  $q.all([mitopediaStore.getCards(), mitopediaStore.getArtists()]).then(function (result) {
       $scope.Cards = result[0];
       $scope.Artists = result[1];
   }, function (error) {

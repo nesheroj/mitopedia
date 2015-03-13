@@ -37,6 +37,7 @@ gulp.task("dev-server", function(callback) {
 
 	new WebpackDevServer(webpack(myConfig), {
 		contentBase: path.join(__dirname, ".build"),
+	  historyApiFallback: true,
 		stats: {
 			colors: true
 		}
@@ -56,6 +57,7 @@ gulp.task("localtunnel", function(callback) {
 
 		new WebpackDevServer(webpack(myConfig), {
 			contentBase: path.join(__dirname, ".build"),
+		  historyApiFallback: true,
 			stats: {
 				colors: true
 			}

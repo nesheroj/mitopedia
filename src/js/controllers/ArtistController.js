@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var MitoPedia;
 (function (MitoPedia) {
     var ArtistController = (function () {
@@ -21,7 +21,7 @@ var MitoPedia;
                     return card.artistId === $routeParams.id;
                 });
 
-                $rootScope.Title = "Ilustrador: " + $scope.Artist.name;
+                $rootScope.Title = 'Ilustrador: ' + $scope.Artist.name;
 
                 window.disqus_shortname = 'mitopedia';
                 window.disqus_identifier = $location.path();

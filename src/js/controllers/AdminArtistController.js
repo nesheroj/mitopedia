@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var MitoPedia;
 (function (MitoPedia) {
     var AdminArtistController = (function () {
@@ -33,10 +33,10 @@ var MitoPedia;
                 } else {
                     $rootScope.Title = 'Crear Ilustrador';
                     $scope.Artist = {
-                        name: "",
-                        url: "",
-                        picture: "",
-                        bio: ""
+                        name: '',
+                        url: '',
+                        picture: '',
+                        bio: ''
                     };
                 }
             }, function (error) {

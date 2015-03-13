@@ -1,5 +1,5 @@
 ﻿
-"use strict";
+'use strict';
 
 var api_root = 'http://mitopedia.guerrademitos.com/api/';
 export default ['$q', '$http', function MitopediaApiStorage($q, $http) {
