@@ -1,5 +1,5 @@
 <div class="row well well-sm" data-ng-if="Card">
-    <img class="pull-right" data-ng-src="http://cdn.guerrademitos.com/JPG/{{ Card.code }}.jpg" />
+    <img class="pull-right" data-ng-if="Card.code.length" data-ng-src="http://cdn.guerrademitos.com/JPG/{{ Card.code }}.jpg" />
     <ul class="card-fields">
         <li><label>Código:</label><input type="text" name="code" data-ng-model="Card.code" /></li>
         <li><label>Imágenes adicionales:</label><input type="text" name="image" data-ng-model="Card.image" /></li>

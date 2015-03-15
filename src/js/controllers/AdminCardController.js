@@ -40,7 +40,7 @@ export default ['$scope', '$location', '$route', '$routeParams', '$rootScope', '
 	$scope.publishCard = function() {
 		$scope.saving = true;
 		$scope.Card.published = true;
-		MitopediaApiStorage.postCard($scope.Card).then(function(result) {
+		mitopediaStore.postCard($scope.Card).then(function(result) {
 			if (!$routeParams.code || $routeParams.code !== $scope.Card.code)
 				$location.path('/AdminCarta/' + $scope.Card.code);
 			else
@@ -50,7 +50,7 @@ export default ['$scope', '$location', '$route', '$routeParams', '$rootScope', '
 
 	$scope.saveCard = function() {
 		$scope.saving = true;
-		MitopediaApiStorage.postCard($scope.Card).then(function(result) {
+		mitopediaStore.postCard($scope.Card).then(function(result) {
 			if (!$routeParams.code || $routeParams.code !== $scope.Card.code)
 				$location.path('/AdminCarta/' + $scope.Card.code);
 			else
@@ -58,11 +58,11 @@ export default ['$scope', '$location', '$route', '$routeParams', '$rootScope', '
 		});
 	};
 
-	MitopediaApiStorage.getArtists(true).then(function(result) {
+	mitopediaStore.getArtists(true).then(function(result) {
 		$scope.Artists = result;
 	});
 
-	MitopediaApiStorage.getCards(true).then(function(result) {
+	mitopediaStore.getCards(true).then(function(result) {
 		if ($routeParams.code) {
 			$scope.Card = result.single(function(card) {
 				return card.code === $routeParams.code;

@@ -2,7 +2,7 @@
 'use strict';
 
 var api_root = 'http://mitopedia.guerrademitos.com/api/';
-export default ['$q', '$http', function MitopediaApiStorage($q, $http) {
+export default ['$q', '$http', function mitopediaStore($q, $http) {
 	this.getArtists = function(skipCache) {
 		var _this = this;
 		var deferred = $q.defer();

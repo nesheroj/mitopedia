@@ -45,7 +45,7 @@
             <label>Notas:</label>
             <ul>
                 <li data-ng-repeat="cardtext in Card.texts | filter:{type:'Notas'}">
-                    <span class="remark-text" data-ng-bind-html="cardtext.text | showdown"></span>
+                    <span class="remark-text" data-ng-bind-html="cardtext.text | commonmark"></span>
                 </li>
             </ul>
         </li>

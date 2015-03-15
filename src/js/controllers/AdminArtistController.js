@@ -1,6 +1,6 @@
 'use strict';
 
-export default [function adminArtistController($scope, $location, $route, $routeParams, $rootScope, MitopediaApiStorage) {
+export default ['$scope', '$location', '$route', '$routeParams', '$rootScope', 'mitopediaStore', function adminArtistController($scope, $location, $route, $routeParams, $rootScope, mitopediaStore) {
 	if (!$scope.isAdmin)
 		$location.url('/');
 
@@ -8,7 +8,7 @@ export default [function adminArtistController($scope, $location, $route, $route
 
 	$scope.saveArtist = function() {
 		$scope.saving = true;
-		MitopediaApiStorage.postArtist($scope.Artist).then(function(result) {
+		mitopediaStore.postArtist($scope.Artist).then(function(result) {
 			if (!$routeParams.code)
 				$location.path('/AdminIlustrador/' + result);
 			else
@@ -16,7 +16,7 @@ export default [function adminArtistController($scope, $location, $route, $route
 		});
 	};
 
-	MitopediaApiStorage.getArtists(true).then(function(result) {
+	mitopediaStore.getArtists(true).then(function(result) {
 		if ($routeParams.id) {
 			$scope.Artist = result.single(function(artist) {
 				return artist.id === $routeParams.id;

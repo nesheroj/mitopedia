@@ -3,7 +3,6 @@
 @import url(loading-bar.min.css);
 
 @color-greek: #9d9d9d;
-@color-egiptian: #e5cc80;
 @color-nordic: #0070dd;
 @color-japanese: #C41E3B;
 @color-aztec: #AAD372;
@@ -11,6 +10,17 @@
 @color-neutral: #451D08;
 @color-ancient: #006600;
 @color-celtic: #330066;
+@color-sumerian: #330066;
+@color-indian: #330066;
+
+@badge-greek: url("assets/griega.png");
+@badge-egiptian: url("assets/egipcia.png");
+@badge-nordic: url("assets/nordica.png");
+@badge-japanese: url("assets/japonesa.png");
+@badge-aztec: url("assets/azteca.png");
+@badge-neutral: url("assets/neutral.png");
+@badge-ancient: url("assets/primigenia.png");
+@badge-celtic: url("assets/celta.png");
 
 .nav, .pagination, .carousel, .panel-title a, .pointer { cursor: pointer; }
 
@@ -65,6 +75,12 @@ i.fa-android {
 .mcelta {
     color: @color-celtic;
 }
+.msumeria {
+  color: @color-sumerian;
+}
+.mhindu {
+  color: @color-indian;
+}
 
 label.tip > span {
     border-bottom: 1px dotted #808080;
@@ -111,7 +127,6 @@ ul.filter-fields, ul.card-fields {
 }
 
 #cards-list, #artist-detail {
-
     ul.card-list > li {
       display: inline-block;
       margin-bottom: 30px;
@@ -139,34 +154,66 @@ ul.filter-fields, ul.card-fields {
 
         &.mnordica > a {
             border: 2px solid @color-nordic;
+            > b {
+              background-image: @badge-nordic;
+            }
         }
 
         &.mazteca > a {
             border: 2px solid @color-aztec;
+            > b {
+              background-image: @badge-aztec;
+            }
         }
 
         &.mjaponesa > a {
             border: 2px solid @color-japanese;
+            > b {
+              background-image: @badge-japanese;
+            }
         }
 
         &.mgriega > a {
             border: 2px solid @color-greek;
+            > b {
+              background-image: @badge-greek;
+            }
         }
 
         &.megipcia > a {
             border: 2px solid @color-egiptian;
+            > b {
+              background-image: @badge-egiptian;
+            }
         }
 
         &.mneutral > a {
             border: 2px solid @color-neutral;
+            > b {
+              background-image: @badge-neutral;
+            }
         }
 
         &.mprimigenia > a {
             border: 2px solid @color-ancient;
+            > b {
+              background-image: @badge-ancient;
+            }
         }
 
         &.mcelta > a {
             border: 2px solid @color-celtic;
+            > b {
+              background-image: @badge-celtic;
+            }
+        }
+
+        &.msumeria > a {
+            border: 2px solid @color-sumerian;
+        }
+
+        &.mhindu > a {
+            border: 2px solid @color-indian;
         }
     }
 }

@@ -1,3 +1,5 @@
+'use strict';
+
 if (!Array.prototype.single) {
     Array.prototype.single = function (fun) {
         var res = this.filter(fun);

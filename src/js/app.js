@@ -11,7 +11,18 @@ const ANALYTICS_APP_ID = 'UA-44248684-1';
 require('app.less');
 
 angular
-	.module('mitopedia', ['ngRoute', 'ngTouch', 'ezfb', 'chieffancypants.loadingBar', 'mitopedia.directives', 'mitopedia.filters'])
+	.module('mitopedia', [
+		'ngRoute',
+		'ngTouch',
+		'ezfb',
+		'chieffancypants.loadingBar',
+		'ui.bootstrap.carousel',
+		'ui.bootstrap.pagination',
+		'ui.bootstrap.tabs',
+		'ui.bootstrap.tooltip',
+		'mitopedia.directives',
+		'mitopedia.filters'
+		])
 	.service('mitopediaStore', services.mitopediaStore)
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 		$routeProvider
@@ -32,6 +43,7 @@ angular
 			cookie: true
 		});
 	}]).run(['$location', '$rootScope', '$window', '$FB' , function($location, $rootScope, $window, $FB) {
+		$rootScope.isAdmin = DEBUG;
 		$FB.Event.subscribe('auth.statusChange', function(statusRes) {
 			$rootScope.loginStatus = statusRes;
 			$FB.api('/me').then(function(me) {

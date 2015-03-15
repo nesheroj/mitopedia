@@ -38,6 +38,6 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'mitopedia.vendor.js?[hash]'),
 		new HtmlWebpackPlugin({ title: 'Mitopedia',	template: 'src/index.html' }),
-		new StatsPlugin(path.join(__dirname, 'stats.json'))
+		new StatsPlugin(path.join(__dirname, 'stats.json'), { chunkModules: true, exclude: [/node_modules/] })
 	]
 };

@@ -19,7 +19,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 
   $rootScope.Title = 'Ilustradores';
 
-  $q.all([MitopediaApiStorage.getCards(), MitopediaApiStorage.getArtists()]).then(function (result) {
+  $q.all([mitopediaStore.getCards(), mitopediaStore.getArtists()]).then(function (result) {
       $scope.Cards = result[0];
       $scope.Artists = result[1];
   }, function (error) {

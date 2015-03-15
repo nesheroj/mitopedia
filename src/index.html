@@ -37,7 +37,6 @@
                             <li><a href="/Cartas/Tokens">Tokens</a></li>
                         </ul>
                     </li>
-                    <!--<li><a href="/Mazos/">Mazos</a></li>-->
                     <li><a href="/Ilustradores/">Ilustradores</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas <b class="caret"></b></a>
@@ -80,14 +79,63 @@
     <footer>
         <div class="container text-center"><small>&copy;<a href="http://www.guerrademitos.com">Guerra de Mitos</a> Todos los derechos reservados. Las ilustraciones son &copy; de sus respectivos autores.</small></div>
     </footer>
-    <script type="text/javascript">console.clear();</script>
+    <script type="text/ng-template" id="template/pagination/pagination.html">
+      <ul class="pagination">
+        <li ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}"><a href ng-click="selectPage(1)">{{getText('first')}}</a></li>
+        <li ng-if="directionLinks" ng-class="{disabled: noPrevious()}"><a href ng-click="selectPage(page - 1)">{{getText('previous')}}</a></li>
+        <li ng-repeat="page in pages track by $index" ng-class="{active: page.active}"><a href ng-click="selectPage(page.number)">{{page.text}}</a></li>
+        <li ng-if="directionLinks" ng-class="{disabled: noNext()}"><a href ng-click="selectPage(page + 1)">{{getText('next')}}</a></li>
+        <li ng-if="boundaryLinks" ng-class="{disabled: noNext()}"><a href ng-click="selectPage(totalPages)">{{getText('last')}}</a></li>
+      </ul>
+    </script>
+    <script type="text/ng-template" id="template/tooltip/tooltip-popup.html">
+      <div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">
+        <div class="tooltip-arrow"></div>
+        <div class="tooltip-inner" ng-bind="content"></div>
+      </div>
+    </script>
+    <script type="text/ng-template" id="template/carousel/carousel.html">
+      <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel" ng-swipe-right="prev()" ng-swipe-left="next()">
+        <ol class="carousel-indicators" ng-show="slides.length > 1">
+            <li ng-repeat="slide in slides track by $index" ng-class="{active: isActive(slide)}" ng-click="select(slide)"></li>
+        </ol>
+        <div class="carousel-inner" ng-transclude></div>
+        <a class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" ng-click="next()" ng-show="slides.length > 1"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    </script>
+    <script type="text/ng-template" id="template/carousel/slide.html">
+      <div ng-class="{
+        'active': leaving || (active && !entering),
+        'prev': (next || active) && direction=='prev',
+        'next': (next || active) && direction=='next',
+        'right': direction=='prev',
+        'left': direction=='next'
+      }" class="item text-center" ng-transclude></div>
+    </script>
+    <script type="text/ng-template" id="template/tabs/tab.html">
+      <li ng-class="{active: active, disabled: disabled}">
+        <a href ng-click="select()" tab-heading-transclude>{{heading}}</a>
+      </li>
+    </script>
+    <script type="text/ng-template" id="template/tabs/tabset.html">
+      <div>
+        <ul class="nav nav-{{type || 'tabs'}}" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" ng-transclude></ul>
+        <div class="tab-content">
+          <div class="tab-pane"
+               ng-repeat="tab in tabs"
+               ng-class="{active: tab.active}"
+               tab-content-transclude="tab">
+          </div>
+        </div>
+      </div>
+    </script>
+    <!--<script type="text/javascript">console.clear();</script>-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.js"></script>
-    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-animate.min.js"></script>-->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-route.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-touch.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-touch.min.js"></script>
     {% for (var chunk in o.htmlWebpackPlugin.assets) { %}
     <script src="{%=o.htmlWebpackPlugin.assets[chunk]%}"></script>
     {% } %}

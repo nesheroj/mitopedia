@@ -4,7 +4,40 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 	$rootScope.Title = $routeParams.type || 'Cartas';
 	$scope.Artists = [];
 	$scope.Cards = [];
-	$scope.Expansions = [];
+	$scope.Expansions = {
+		'GDM1': {
+			era: 'Era I',
+			visible: false
+		},
+		'GDM2': {
+			era: 'Era I',
+			visible: false
+		},
+		'GDM3': {
+			era: 'Era I',
+			visible: false
+		},
+		'GDM4': {
+			era: 'Era I',
+			visible: false
+		},
+		'GDM5': {
+			era: 'Era II',
+			visible: false
+		},
+		'GDM6': {
+			era: 'Era II',
+			visible: false
+		},
+		'GDM7': {
+			era: 'Era II',
+			visible: false
+		},
+		'Promocional': {
+			era: '',
+			visible: false
+		},
+	};
 	$scope.Keywords = [];
 	$scope.KeywordModes = {
 		'todas': true,
@@ -135,9 +168,7 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 		});
 		$scope.Artists = $scope.Artists.concat(result[1].sort((a, b) => +(a.name > b.name) || +(a.name === b.name) - 1));
 		$scope.Cards.forEach(card => {
-			if ($scope.Expansions.indexOf(card.expansion) === -1) {
-				$scope.Expansions.push(card.expansion);
-			}
+			$scope.Expansions[card.expansion].visible = true;
 			if ($scope.Mythologies.indexOf(card.mythology) === -1) {
 				$scope.Mythologies.push(card.mythology);
 			}
@@ -150,7 +181,6 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 			}
 		});
 
-		$scope.Expansions.sort();
 		$scope.Mythologies.sort();
 		$scope.Keywords.sort();
 
