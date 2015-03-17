@@ -172,13 +172,11 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 			if ($scope.Mythologies.indexOf(card.mythology) === -1) {
 				$scope.Mythologies.push(card.mythology);
 			}
-			if (card.keywords) {
-				card.keywords.split(';').forEach(cardKeyword => {
-					if ($scope.Keywords.indexOf(cardKeyword) === -1) {
-						$scope.Keywords.push(cardKeyword);
-					}
-				});
-			}
+			card.keywords.forEach(cardKeyword => {
+				if ($scope.Keywords.indexOf(cardKeyword) === -1) {
+					$scope.Keywords.push(cardKeyword);
+				}
+			});
 		});
 
 		$scope.Mythologies.sort();
@@ -206,12 +204,12 @@ export default ['$scope', '$location', '$routeParams', '$rootScope', '$q', 'mito
 				}));
 				if ($scope.Filter.keywordMode) {
 					pass = pass && ($scope.Filter.keywords.length === 0 || $scope.Filter.keywords.every(function(filterKeyword) {
-						return card.keywords.split(';').some(function(cardKeyword) {
+						return card.keywords.some(function(cardKeyword) {
 							return filterKeyword === cardKeyword;
 						});
 					}));
 				} else {
-					pass = pass && ($scope.Filter.keywords.length === 0 || card.keywords.split(';').some(function(cardKeyword) {
+					pass = pass && ($scope.Filter.keywords.length === 0 || card.keywords.some(function(cardKeyword) {
 						return $scope.Filter.keywords.some(function(filterKeyword) {
 							return filterKeyword === cardKeyword;
 						});

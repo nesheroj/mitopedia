@@ -2,6 +2,11 @@
 'use strict';
 
 var api_root = 'http://mitopedia.guerrademitos.com/api/';
+var headers = {
+	'X-Parse-Application-Id': 'cY4crIA5XgkCSrKMA4ZMmrFF7bbjJjwTeo2yge6B',
+	'X-Parse-REST-API-Key': 'mno5o5sIu41lgFzjgMvUB26ryDqAOCGYGGU9k2Lx'
+};
+
 export default ['$q', '$http', function mitopediaStore($q, $http) {
 	this.getArtists = function(skipCache) {
 		var _this = this;
@@ -25,9 +30,13 @@ export default ['$q', '$http', function mitopediaStore($q, $http) {
 		if (!skipCache && this.cardCache != undefined)
 			deferred.resolve(this.cardCache);
 		else {
-			$http.get(api_root + 'cards').success(function(data) {
-				_this.cardCache = data;
-				deferred.resolve(data);
+			$http({
+				method: 'GET',
+				url: 'https://api.parse.com/1/classes/cards?limit=1000',
+				headers
+			}).success(function(data) {
+				_this.cardCache = data.results;
+				deferred.resolve(_this.cardCache);
 			}).error(function(error) {
 				console.log(error);
 				deferred.reject(error);

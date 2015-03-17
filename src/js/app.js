@@ -27,12 +27,15 @@ angular
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', { controller: controllers.cardsController, templateUrl: require('views/cards.html') })
+			//.when('/', { controller: controllers.migrateController, templateUrl: require('views/migrate.html') })
 			.when('/AdminCarta/:code?', { controller: controllers.adminCardController, templateUrl: require('views/admincard.html') })
 			.when('/AdminIlustrador/:id?', { controller: controllers.adminArtistController, templateUrl: require('views/adminartist.html') })
 			.when('/Cartas/:type', { controller: controllers.cardsController, templateUrl: require('views/cards.html') })
 			.when('/Carta/:code', { controller: controllers.cardController, templateUrl: require('views/card.html') })
 			.when('/Ilustradores/', { controller: controllers.artistsController, templateUrl: require('views/artists.html') })
 			.when('/Ilustrador/:id', { controller: controllers.artistController, templateUrl: require('views/artist.html') })
+			.when('/Ilustrador/:id', { controller: controllers.artistController, templateUrl: require('views/artist.html') })
+
 			.otherwise({ redirectTo: '/' });
 
 		$locationProvider.html5Mode(true).hashPrefix('!');
