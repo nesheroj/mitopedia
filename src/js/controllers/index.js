@@ -7,3 +7,4 @@ export { default as cardsController } from './cardsController.js';
 // export { default as deckController } from './deckController.js';
 // export { default as decksController } from './decksController.js';
 export { default as cardsController } from './cardsController.js';
+export { default as migrateController } from './migrate.js';
